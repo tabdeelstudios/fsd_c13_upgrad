@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #flexParent {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #incomeList {
+            border: 2px solid green;
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #expenseList {
+            border: 2px solid red;
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #addButtons {
+            text-align: center;
+        }
+
+        #container {
+            margin-bottom: 50px;
+        }
+
+        #incomeAddForm,
+        #expenseAddForm {
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="container">
+        <div id="flexParent">
+            <div id="incomeList">
+                <h2>All Income</h2>
+                <hr>
+                <ol id="allIncome"></ol>
+            </div>
+            <div id="expenseList">
+                <h2>All Expenses</h2>
+                <hr>
+                <ol id="allExpense"></ol>
+            </div>
+        </div>
+        <h1 id="savingsHeading">Savings : </h1>
+        <div id="addButtons">
+            <button id="addIncomeButton">Add Income</button>
+            <button id="addExpenseButton">Add Expense</button>
+        </div>
+    </section>
+
+    <section id="incomeAddForm">
+        <form>
+            <label for="incomeSource">Income Source</label>
+            <input type="text" id="incomeSource">
+            <label for="incomeAmount">Income Amount</label>
+            <input type="number" id="incomeAmount">
+            <button id="submitIncome">Submit Income</button>
+            <button id="hideIncome">Hide</button>
+        </form>
+    </section>
+    <section id="expenseAddForm">
+        <form>
+            <label for="expenseSource">Expense Source</label>
+            <input type="text" id="expenseSource">
+            <label for="expenseAmount">Expense Amount</label>
+            <input type="number" id="expenseAmount">
+            <button id="submitExpense">Submit Expense</button>
+            <button id="hideExpense">Hide</button>
+        </form>
+    </section>
+
+    <script>
+
+        let savings = 0.0;
+        let tempText = "Savings : Rs. ";
+        let savingsHeading = document.getElementById("savingsHeading");
+        savingsHeading.innerHTML = tempText + savings;
+        function showAddIncomeForm() {
+            document.getElementById("incomeAddForm").style.display = "block";
+        }
+
+        function hideAddIncomeForm() {
+            document.getElementById("incomeAddForm").style.display = "none";
+        }
+
+        let incomeButtonSelector = document.getElementById("addIncomeButton");
+        incomeButtonSelector.addEventListener("click", showAddIncomeForm);
+
+        function showAddExpenseForm() {
+            document.getElementById("expenseAddForm").style.display = "block";
+        }
+
+        function hideAddExpenseForm() {
+            document.getElementById("expenseAddForm").style.display = "none";
+        }
+
+        let expenseButtonSelector = document.getElementById("addExpenseButton");
+        expenseButtonSelector.addEventListener("click", showAddExpenseForm);
+
+        let handleAddIncomeButton = document.getElementById("submitIncome");
+        handleAddIncomeButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            let incomeSourceValue = document.getElementById("incomeSource").value;
+            let incomeAmountValue = parseInt(document.getElementById("incomeAmount").value);
+            console.log(incomeSourceValue + " - Rs. " + incomeAmountValue);
+            let newIncomeItem = document.createElement("li");
+            newIncomeItem.innerHTML = incomeSourceValue + " - Rs. " + incomeAmountValue;
+            let allIncomeList = document.getElementById("allIncome");
+            allIncomeList.appendChild(newIncomeItem);
+            document.getElementById("incomeSource").value = "";
+            document.getElementById("incomeAmount").value = "";
+            savings = savings + incomeAmountValue;
+            savingsHeading.innerHTML = tempText + savings;
+            console.log(savings);
+        });
+
+        let hideIncomeButtonHandler = document.getElementById("hideIncome");
+        hideIncomeButtonHandler.addEventListener("click", function (event) {
+            event.preventDefault();
+            hideAddIncomeForm();
+        });
+
+        let hideExpenseButtonHandler = document.getElementById("hideExpense");
+        hideExpenseButtonHandler.addEventListener("click", function (event) {
+            event.preventDefault();
+            hideAddExpenseForm();
+        });
+
+        let handleAddExpenseButton = document.getElementById("submitExpense");
+        handleAddExpenseButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            let expenseSourceValue = document.getElementById("expenseSource").value;
+            let expenseAmountValue = parseInt(document.getElementById("expenseAmount").value);
+            console.log(expenseSourceValue + " - Rs. " + expenseAmountValue);
+            let newExpenseItem = document.createElement("li");
+            newExpenseItem.innerHTML = expenseSourceValue + " - Rs. " + expenseAmountValue;
+            let allExpenseList = document.getElementById("allExpense");
+            allExpenseList.appendChild(newExpenseItem);
+            document.getElementById("expenseSource").value = "";
+            document.getElementById("expenseAmount").value = "";
+            savings = savings - expenseAmountValue;
+            savingsHeading.innerHTML = tempText + savings;
+        });
+    </script>
+</body>
+
+</html>
