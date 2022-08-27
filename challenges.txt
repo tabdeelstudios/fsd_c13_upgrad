@@ -1,0 +1,36 @@
+Problem 1
+--------------------
+Create two form fields, one submit button and one paragraph.
+One field reads the username and the other field reads the password.
+
+When the submit button is clicked
+    - store the username and password
+    - check if username is "kate"
+    - check if password is "1234"
+    - if it's a match, the paragraph shows "Hello Kate!"
+    - it it's not a match, the paragraph shows "Not recognised"
+
+
+Problem 2
+--------------------
+Create a random Quote generator.
+Collect 10 random quotes from the internet and put them in a JS object.
+Choose a random quote when the user presses the "Generate Quote" button on the screen and show it in a paragraph.
+
+
+Problem 3
+--------------------
+Connect to Random User API and fetch the data for a random user.
+Store the data in a JS object.
+
+Extract the email and password and store that in localStorage.
+
+Create two form fields, one submit button and one paragraph.
+One field reads the username and the other field reads the password.
+When the submit button is clicked
+    - store the username and password
+    - check if username matches the localStorage username
+    - check if password matches the localStorage password
+    - if it's a match, the paragraph shows "Hello {Username}!"
+    - it it's not a match, the paragraph shows "Not recognised"
+
